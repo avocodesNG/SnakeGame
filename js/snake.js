@@ -1,6 +1,8 @@
 var canvas = document.getElementById('game');
   var context = canvas.getContext('2d');
 
+  var SnakeScore = 0;
+
   var grid = 16;
   var count = 0;
     
@@ -97,7 +99,6 @@ var canvas = document.getElementById('game');
       
       // drawing 1 px smaller than the grid creates a grid effect in the snake body so you can see how long it is
       context.fillRect(cell.x, cell.y, grid-1, grid-1);  
-
       // snake ate apple
       if ((cell.x === apple.x && cell.y === apple.y) || (cell.x === apple2.x && cell.y === apple2.y) ||(cell.x === apple3.x && cell.y === apple3.y)) {
         snake.maxCells++;
@@ -105,12 +106,19 @@ var canvas = document.getElementById('game');
             apple.x = getRandomInt(0, 25) * grid;
             apple.y = getRandomInt(0, 25) * grid; 
             console.log("X:" + apple.x + " Y:" + apple.y);
+            gamerA= document.getElementById('gamerA');
+            gamerA.style.backgroundColor = "black";
+
+            score = document.getElementById('score');
+            scoreValue = score.innerHTML;
+            console.log(scoreValue);
+            SnakeScore +=10 ;
+            score.innerHTML =SnakeScore;
    
           }else if(cell.x===apple2.x){
             apple2.x = getRandomInt(0, 25) * grid;
             apple2.y = getRandomInt(0, 25) * grid;
             console.log("X:" + apple2.x + " Y:" + apple2.y);
-            gamer.innerHTML = "Won";
 
           }else{
             apple3.x = getRandomInt(0, 25) * grid;
