@@ -1,8 +1,9 @@
 var canvas = document.getElementById('game');
 var context = canvas.getContext('2d');
 
-// UseerScore as he/she plays
+// UserScore as he/she plays
 var SnakeScore = 0;
+var newSnakeScore = getRandomInt(0, 25);
 
 // Snake Box Size
 var grid = 16;
@@ -106,23 +107,15 @@ function loop() {
         // snake ate apple
         if ((cell.x === apple.x && cell.y === apple.y) || (cell.x === apple2.x && cell.y === apple2.y) || (cell.x === apple3.x && cell.y === apple3.y)) {
             snake.maxCells++;
+
             if (cell.x === apple.x) {
                 apple.x = getRandomInt(0, 25) * grid;
                 apple.y = getRandomInt(0, 25) * grid;
-                console.log("X:" + apple.x + " Y:" + apple.y);
-                gamerA = document.getElementById('gamerA');
-                gamerA.style.backgroundColor = "black";
-
-                score = document.getElementById('score');
-                scoreValue = score.innerHTML;
-                console.log(scoreValue);
-                SnakeScore += 10;
-                score.innerHTML = SnakeScore;
-
+                addScore('score', SnakeScore, newSnakeScore);
             } else if (cell.x === apple2.x) {
                 apple2.x = getRandomInt(0, 25) * grid;
                 apple2.y = getRandomInt(0, 25) * grid;
-                console.log("X:" + apple2.x + " Y:" + apple2.y);
+                // console.log("X:" + apple2.x + " Y:" + apple2.y);
 
             } else {
                 apple3.x = getRandomInt(0, 25) * grid;
@@ -154,7 +147,7 @@ function loop() {
 
 // listen to keyboard events to move the snake
 document.addEventListener('keydown', function(e) {
-    console.log(e.which);
+    // console.log(e.which);
     // prevent snake from backtracking on itself by checking that it's 
     // not already moving on the same axis (pressing left while moving
     // left won't do anything, and pressing right while moving left
@@ -187,6 +180,13 @@ document.addEventListener('keydown', function(e) {
 
     }
 });
+
+// Increment score
+function addScore(targetElement, previousScore, scoreToAdd) {
+    SnakeScore = previousScore + scoreToAdd;
+    score = document.getElementById(targetElement);
+    score.innerHTML = SnakeScore;
+}
 
 // start the game
 requestAnimationFrame(loop);
