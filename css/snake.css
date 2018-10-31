@@ -1,13 +1,28 @@
 body {
-    background-color: rgb(26, 104, 194);
+    /* background-color: rgb(26, 104, 194); */
+    background-image: url(../image/bg.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.rightSide, .weSnake{
+    margin-top: 40px;
+}
+
+.rightSide h4{
+    color: white;
 }
 
 canvas {
     border: 4px solid white;
+    background-image: url(../image/canva-bg.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
 }
 
 h1 {
-    color: rgb(12, 68, 128);
+    color: white;
 }
 
 .options h4 {
@@ -19,17 +34,21 @@ h1 {
 }
 
 .options h4:first-child {
-    background: yellow;
+    background: purple;
+    color: white;
+    box-shadow: 1px 2px;
 }
 
 .options h4:nth-child(2) {
-    background: green;
+    background: purple;
     color: white;
+    box-shadow: 1px 2px;
 }
 
 .options h4:last-child {
-    background: red;
+    background: purple;
     color: white;
+    box-shadow: 1px 2px;
 }
 
 form h3 {
