@@ -10,11 +10,26 @@ h1 {
     color: rgb(12, 68, 128);
 }
 
-.scores {
-    border: 2px solid rgb(135, 185, 238);
+.options h4 {
     color: rgb(12, 68, 128);
+    /* background: red; */
+    border-radius: .5em;
     padding: .5em;
-    width: 50%;
+    width: 60%;
+}
+
+.options h4:first-child {
+    background: yellow;
+}
+
+.options h4:nth-child(2) {
+    background: green;
+    color: white;
+}
+
+.options h4:last-child {
+    background: red;
+    color: white;
 }
 
 form h3 {
