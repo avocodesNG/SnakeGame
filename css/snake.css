@@ -5,11 +5,12 @@ body {
     background-size: cover;
 }
 
-.rightSide, .weSnake{
+.rightSide,
+.weSnake {
     margin-top: 40px;
 }
 
-.rightSide h4{
+.rightSide h4 {
     color: white;
 }
 

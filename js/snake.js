@@ -1,8 +1,10 @@
 var canvas = document.getElementById('game');
 var context = canvas.getContext('2d');
 
-// UseerScore as he/she plays
+// UserScore as he/she plays
 var SnakeScore = 0;
+var newSnakeScore = getRandomInt(0,25);
+
 
 // Snake Box Size
 var grid = 16;
@@ -93,6 +95,40 @@ function loop() {
     context.fillStyle = 'Yellow';
     context.fillRect(apple2.x, apple2.y, grid - 1, grid - 1);
 
+    function populate() {
+        counter = 0;
+        count = 0;
+        var answers = '';
+        questions = {
+            'one': {
+                'question': 'who did what',
+                'answer':[
+                    'Red', 'Black', 'green'
+                ]
+            }
+        }
+        question = document.getElementById('question');
+        answer = document.getElementById('answer');
+        questions.one.answer.forEach(element => {
+            if(count = 0){
+                color= 'red';
+                Option = "A";
+            }else if(count = 1){
+                color = 'yellow';
+                Option = "B"
+            }else{
+                color = 'green';
+                Option = "C";
+            }
+            answers += "<h4><b style='color:" + color + "'>" + Option +"</b> - " + element + " </h4>";
+            count++
+        });
+        question.innerHTML = questions.one.question;
+        answer.innerHTML = answers;
+
+        console.log(question);
+        console.log(questions.one);
+    }
     // draw apple 3
     context.fillStyle = 'green';
     context.fillRect(apple3.x, apple3.y, grid - 1, grid - 1);
@@ -109,20 +145,11 @@ function loop() {
             if (cell.x === apple.x) {
                 apple.x = getRandomInt(0, 25) * grid;
                 apple.y = getRandomInt(0, 25) * grid;
-                console.log("X:" + apple.x + " Y:" + apple.y);
-                gamerA = document.getElementById('gamerA');
-                gamerA.style.backgroundColor = "black";
-
-                score = document.getElementById('score');
-                scoreValue = score.innerHTML;
-                console.log(scoreValue);
-                SnakeScore += 10;
-                score.innerHTML = SnakeScore;
-
+                addScore('score', SnakeScore, newSnakeScore);
+                populate();
             } else if (cell.x === apple2.x) {
                 apple2.x = getRandomInt(0, 25) * grid;
                 apple2.y = getRandomInt(0, 25) * grid;
-                console.log("X:" + apple2.x + " Y:" + apple2.y);
 
             } else {
                 apple3.x = getRandomInt(0, 25) * grid;
@@ -154,7 +181,6 @@ function loop() {
 
 // listen to keyboard events to move the snake
 document.addEventListener('keydown', function(e) {
-    console.log(e.which);
     // prevent snake from backtracking on itself by checking that it's 
     // not already moving on the same axis (pressing left while moving
     // left won't do anything, and pressing right while moving left
@@ -187,6 +213,13 @@ document.addEventListener('keydown', function(e) {
 
     }
 });
+
+// increment score
+function addScore(targetElement, previousScore, scoreToAdd){
+    SnakeScore = previousScore + scoreToAdd;
+    score = document.getElementById(targetElement);
+    score.innerHTML= SnakeScore;
+}
 
 // start the game
 requestAnimationFrame(loop);
