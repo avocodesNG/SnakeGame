@@ -1,48 +1,39 @@
 <!DOCTYPE html>
 <html>
-  <head>
+
+<head>
     <title>Vote | Anaconda</title>
-    <link rel="stylesheet" href="css/snake.css">
     <link rel="stylesheet" href="css/bootstrap.min.css">
-  </head>
+    <link rel="stylesheet" href="css/snake.css">
+</head>
+
 <body>
-  <div class="container">
-    <div class="row">
-      <div class="col-md-6">
-        <h1 style="color: white">QUERY </h1>
-        <!-- <p id="gamer"><b>You are playing our game</b></p> -->
-        <form action="">
-            <h3 style="color: yellow" id="Qs">Election Period is close, take your first step.</h3>
-            <label class="container gamerA" id="gamerA" >
-              <input type="radio" name="" > A - Apply for PVC.
-              <span class="checkmark"></span>
-            </label>
-              
-            <label class="container gamerB">
-              <input type="radio" name="" id="gamerB"> B - Never Care.
-              <span class="checkmark"></span>
-            </label>
-      
-              <label class="container gamerC">
-                <input type="radio" name="" id="gamerC"> C - No interest.
-                <span class="checkmark"></span>
-              </label>
-        </form>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h1 class="text-center mb-5 mt-3">QUERY </h1>
+                <h4 class="text-center mb-5">Election Period is close, Allow us to guide you through a simulation of the voting process.</h4>
+                <div class="ml-5 mb-5">
+                    <h4>A - Apply for PVC </h4>
+                    <h4>B - Never Care </h4>
+                    <h4>C - No Interest </h4>
+                </div>
 
-        <h4 class="scores"><em style="color: white">SCORES:</em> #<i id="score">500</i></h4>
-      </div>
+                <h4 class="scores text-center ml-5 ">SCORES:<span id="score ">0</span></h4>
+            </div>
 
-      <div class="col-md-6">
-          <div>
-            <h1 style="color:white;">TARGET</h1>
-            <canvas width="600" height="400" id="game"></canvas>
-          </div>
-      </div>
+            <div class="col-md-6 ">
+                <div>
+                    <h1 class="text-center my-3 ">WE VOTE NAIJA</h1>
+                    <canvas width="600 " height="400 " id="game "></canvas>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
-  
+
 </body>
-<script src="js/snake.js" type="text/javascript"></script>
-<script src="js/jquery.js" type="text/javascript"></script>
-<script src="js/bootstrap.min.js" type="text/javascript"></script>
+<script src="js/snake.js " type="text/javascript "></script>
+<script src="js/jquery.js " type="text/javascript "></script>
+<script src="js/bootstrap.min.js " type="text/javascript "></script>
+
 </html>
