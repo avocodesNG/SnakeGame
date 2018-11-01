@@ -97,38 +97,37 @@ function loop() {
 
     function populate() {
         counter = 0;
-        count = 0;
-        var answers = '';
+        answers = '';
         questions = {
+            'count' : 1,
             'one': {
                 'question': 'who did what',
                 'answer':[
                     'Red', 'Black', 'green'
+                ],
+                'color': [
+                    'red', 'black', 'green'
+                ],
+                'options': [
+                    'A', 'B', 'C'
                 ]
             }
         }
         question = document.getElementById('question');
         answer = document.getElementById('answer');
-        questions.one.answer.forEach(element => {
-            if(count = 0){
-                color= 'red';
-                Option = "A";
-            }else if(count = 1){
-                color = 'yellow';
-                Option = "B"
-            }else{
-                color = 'green';
-                Option = "C";
-            }
-            answers += "<h4><b style='color:" + color + "'>" + Option +"</b> - " + element + " </h4>";
-            count++
-        });
+        questions.one.answer.forEach(populateAnswers);
         question.innerHTML = questions.one.question;
         answer.innerHTML = answers;
 
         console.log(question);
         console.log(questions.one);
     }
+    function populateAnswers(element, index){
+            color = questions.one.color[index];
+            Option = questions.one.options[index];
+            answers += "<h4><b style='color:" + color + "'>" + Option + "</b> - " + element + " </h4>";
+        }
+    
     // draw apple 3
     context.fillStyle = 'green';
     context.fillRect(apple3.x, apple3.y, grid - 1, grid - 1);
