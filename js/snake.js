@@ -92,12 +92,19 @@ function loop() {
     context.fillRect(apple.x, apple.y, grid - 1, grid - 1);
 
     // draw apple 2
-    context.fillStyle = 'Yellow';
+    context.fillStyle = 'yellow';
     context.fillRect(apple2.x, apple2.y, grid - 1, grid - 1);
+
+    // draw apple 3
+    context.fillStyle = 'green';
+    context.fillRect(apple3.x, apple3.y, grid - 1, grid - 1);
+
 
     function populate() {
         counter = 0;
         answers = '';
+
+        // data structure
         questions = {
             'count' : 1,
             'one': {
@@ -106,32 +113,40 @@ function loop() {
                     'Red', 'Black', 'green'
                 ],
                 'color': [
-                    'red', 'black', 'green'
+                    'red', 'yellow', 'green'
                 ],
                 'options': [
                     'A', 'B', 'C'
-                ]
+                ],
+                'correct' :'B'
             }
         }
+
         question = document.getElementById('question');
         answer = document.getElementById('answer');
+        // Run a script to build the answers choices
         questions.one.answer.forEach(populateAnswers);
+        // replace with new answers
         question.innerHTML = questions.one.question;
         answer.innerHTML = answers;
+        console.log(answers);
 
-        console.log(question);
-        console.log(questions.one);
+
     }
+    // function to build arrays
     function populateAnswers(element, index){
-            color = questions.one.color[index];
-            Option = questions.one.options[index];
-            answers += "<h4><b style='color:" + color + "'>" + Option + "</b> - " + element + " </h4>";
+        color = questions.one.color[index];
+        Option = questions.one.options[index];
+        correct = questions.one.correct;
+        if(Option == correct){
+            answers += "<h4><b style='color:" + color + "' id = 'correct'>" + Option + "</b> - " + element + " </h4>";
+            return;
         }
+        // console.log(Option);
+        answers += "<h4><b style='color:" + color + "'>" + Option + "</b> - " + element + " </h4>";
+    }
     
-    // draw apple 3
-    context.fillStyle = 'green';
-    context.fillRect(apple3.x, apple3.y, grid - 1, grid - 1);
-
+   
     // draw snake one cell at a time
     context.fillStyle = 'black';
     snake.cells.forEach(function(cell, index) {
