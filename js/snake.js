@@ -171,12 +171,7 @@ function loop() {
         color = questions[questions.count].color[index];
         Option = questions[questions.count].options[index];
         correct = questions[questions.count].correct;
-        // add id to correct question
-        if(Option == correct){
-            answers += "<h4><b style='color:" + color + "' id = 'correct'>" + Option + "</b> - " + element + " </h4>";
-            return;
-        }
-        // console.log(Option);
+
         answers += "<h4><b style='color:" + color + "'>" + Option + "</b> - " + element + " </h4>";
     }
     
