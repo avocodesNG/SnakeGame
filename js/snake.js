@@ -7,7 +7,33 @@ var newSnakeScore = getRandomInt(0,25);
 // data structure
 questions = {
     'count': 1,
-    'one': {
+    1: {
+        'question': 'You have to visit the nearest polling unit to apply for your PVC.',
+        'answer': [
+            'Ok, I will', 'No, I am damned busy', 'Not sure i will need it'
+        ],
+        'color': [
+            'red', 'yellow', 'green'
+        ],
+        'options': [
+            'A', 'B', 'C'
+        ],
+        'correct': 'red'
+    },
+    2: {
+        'question': 'If you lose your PVC what would you do?',
+        'answer': [
+            'Forget It', 'go to the appropriate electoral body', 'Other'
+        ],
+        'color': [
+            'red', 'yellow', 'green'
+        ],
+        'options': [
+            'A', 'B', 'C'
+        ],
+        'correct': 'yellow'
+    }, 
+    3: {
         'question': 'who did what',
         'answer': [
             'Red', 'Black', 'green'
@@ -18,8 +44,8 @@ questions = {
         'options': [
             'A', 'B', 'C'
         ],
-        'correct': 'yellow'
-    }
+        'correct': 'green'
+    },
 }
 
 
@@ -135,16 +161,16 @@ function loop() {
         question = document.getElementById('question');
         answer = document.getElementById('answer');
         // Run a script to build the answers choices
-        questions.one.answer.forEach(populateAnswers);
+        questions[questions.count].answer.forEach(populateAnswers);
         // replace with new answers
-        question.innerHTML = questions.one.question;
+        question.innerHTML = questions[questions.count].question;
         answer.innerHTML = answers;
     }
     // function to build arrays
     function populateAnswers(element, index){
-        color = questions.one.color[index];
-        Option = questions.one.options[index];
-        correct = questions.one.correct;
+        color = questions[questions.count].color[index];
+        Option = questions[questions.count].options[index];
+        correct = questions[questions.count].correct;
         // add id to correct question
         if(Option == correct){
             answers += "<h4><b style='color:" + color + "' id = 'correct'>" + Option + "</b> - " + element + " </h4>";
@@ -178,17 +204,15 @@ function loop() {
                 apple3.y = getRandomInt(0, 25) * grid;
                 choice = apple3
             }
-            if(choice.fill == questions.one.correct){
+            if(choice.fill == questions[questions.count].correct){
                 console.log('hello');
                 addScore('score', SnakeScore, getRandomInt(0,25));
                 populate();
+                console.log(questions.count);
+                questions.count++
             }else{
-                
                 addScore('score', SnakeScore, getRandomInt(-25, 0));
             }
-            console.log(choice);
-
-
         }
 
         // check collision with all cells after this one (modified bubble sort)
