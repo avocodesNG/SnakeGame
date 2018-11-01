@@ -174,7 +174,6 @@ function loop() {
                 apple.x = getRandomInt(0, 25) * grid;
                 apple.y = getRandomInt(0, 25) * grid;
                 choice = apple;
-                
             } else if (cell.x === apple2.x) {
                 apple2.x = getRandomInt(0, 25) * grid;
                 apple2.y = getRandomInt(0, 25) * grid;
@@ -184,6 +183,7 @@ function loop() {
                 apple3.y = getRandomInt(0, 25) * grid;
                 choice = apple3
             }
+
             if(choice.fill == questions[questions.count].correct){
                 addScore('score', SnakeScore, getRandomInt(0,25));
                 populate();
@@ -193,6 +193,7 @@ function loop() {
                 populate();
                 questions.count++
             }
+            console.log(questions.count);
         }
 
         // check collision with all cells after this one (modified bubble sort)
@@ -257,10 +258,7 @@ function addScore(targetElement, previousScore, scoreToAdd) {
 }
 
 function populate() {
-    counter = 0;
     answers = '';
-
-
     question = document.getElementById('question');
     answer = document.getElementById('answer');
     // Run a script to build the answers choices
@@ -280,5 +278,7 @@ function populateAnswers(element, index) {
 
 
 // start the game
-requestAnimationFrame(loop);
 populate();
+questions.count++
+
+requestAnimationFrame(loop);
