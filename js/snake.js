@@ -4,6 +4,23 @@ var context = canvas.getContext('2d');
 // UserScore as he/she plays
 var SnakeScore = 0;
 var newSnakeScore = getRandomInt(0,25);
+// data structure
+questions = {
+    'count': 1,
+    'one': {
+        'question': 'who did what',
+        'answer': [
+            'Red', 'Black', 'green'
+        ],
+        'color': [
+            'red', 'yellow', 'green'
+        ],
+        'options': [
+            'A', 'B', 'C'
+        ],
+        'correct': 'yellow'
+    }
+}
 
 
 // Snake Box Size
@@ -28,19 +45,22 @@ var snake = {
 // Apple 1
 var apple = {
     x: 320,
-    y: 320
+    y: 320,
+    fill: 'red'
 };
 
 // Apple 2
 var apple2 = {
     x: 112,
-    y: 224
+    y: 224,
+    fill: 'yellow'
 };
 
 // Apple 3
 var apple3 = {
     x: 240,
-    y: 320
+    y: 320,
+    fill: 'green'
 };
 
 
@@ -88,39 +108,29 @@ function loop() {
     }
 
     // draw apple
-    context.fillStyle = 'red';
+    context.fillStyle = apple.fill;
     context.fillRect(apple.x, apple.y, grid - 1, grid - 1);
 
     // draw apple 2
-    context.fillStyle = 'yellow';
+    context.fillStyle = apple2.fill;
     context.fillRect(apple2.x, apple2.y, grid - 1, grid - 1);
 
     // draw apple 3
-    context.fillStyle = 'green';
+    context.fillStyle = apple3.fill;
     context.fillRect(apple3.x, apple3.y, grid - 1, grid - 1);
 
+
+    // increment score
+    function addScore(targetElement, previousScore, scoreToAdd) {
+        SnakeScore = previousScore + scoreToAdd;
+        score = document.getElementById(targetElement);
+        score.innerHTML = SnakeScore;
+    }
 
     function populate() {
         counter = 0;
         answers = '';
 
-        // data structure
-        questions = {
-            'count' : 1,
-            'one': {
-                'question': 'who did what',
-                'answer':[
-                    'Red', 'Black', 'green'
-                ],
-                'color': [
-                    'red', 'yellow', 'green'
-                ],
-                'options': [
-                    'A', 'B', 'C'
-                ],
-                'correct' :'B'
-            }
-        }
 
         question = document.getElementById('question');
         answer = document.getElementById('answer');
@@ -129,15 +139,13 @@ function loop() {
         // replace with new answers
         question.innerHTML = questions.one.question;
         answer.innerHTML = answers;
-        console.log(answers);
-
-
     }
     // function to build arrays
     function populateAnswers(element, index){
         color = questions.one.color[index];
         Option = questions.one.options[index];
         correct = questions.one.correct;
+        // add id to correct question
         if(Option == correct){
             answers += "<h4><b style='color:" + color + "' id = 'correct'>" + Option + "</b> - " + element + " </h4>";
             return;
@@ -159,19 +167,28 @@ function loop() {
             if (cell.x === apple.x) {
                 apple.x = getRandomInt(0, 25) * grid;
                 apple.y = getRandomInt(0, 25) * grid;
-                addScore('score', SnakeScore, newSnakeScore);
-                populate();
+                choice = apple;
+                
             } else if (cell.x === apple2.x) {
                 apple2.x = getRandomInt(0, 25) * grid;
                 apple2.y = getRandomInt(0, 25) * grid;
-
+                choice = apple2;
             } else {
                 apple3.x = getRandomInt(0, 25) * grid;
                 apple3.y = getRandomInt(0, 25) * grid;
+                choice = apple3
             }
-            // canvas is 400x400 which is 25x25 grids 
-            // apple.x = getRandomInt(0, 25) * grid;
-            // apple.y = getRandomInt(0, 25) * grid;
+            if(choice.fill == questions.one.correct){
+                console.log('hello');
+                addScore('score', SnakeScore, newSnakeScore);
+                populate();
+            }else{
+                minusScore = - + newSnakeScore;
+                addScore('score', SnakeScore, minusScore);
+            }
+            console.log(choice);
+
+
         }
 
         // check collision with all cells after this one (modified bubble sort)
@@ -228,12 +245,6 @@ document.addEventListener('keydown', function(e) {
     }
 });
 
-// increment score
-function addScore(targetElement, previousScore, scoreToAdd){
-    SnakeScore = previousScore + scoreToAdd;
-    score = document.getElementById(targetElement);
-    score.innerHTML= SnakeScore;
-}
 
 // start the game
 requestAnimationFrame(loop);
