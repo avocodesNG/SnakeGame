@@ -200,13 +200,13 @@ function loop() {
                 choice = apple3
             }
             if(choice.fill == questions[questions.count].correct){
-                console.log('hello');
                 addScore('score', SnakeScore, getRandomInt(0,25));
                 populate();
-                console.log(questions.count);
                 questions.count++
             }else{
                 addScore('score', SnakeScore, getRandomInt(-25, 0));
+                populate();
+                questions.count++
             }
         }
 
