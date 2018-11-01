@@ -180,11 +180,11 @@ function loop() {
             }
             if(choice.fill == questions.one.correct){
                 console.log('hello');
-                addScore('score', SnakeScore, newSnakeScore);
+                addScore('score', SnakeScore, getRandomInt(0,25));
                 populate();
             }else{
-                minusScore = - + newSnakeScore;
-                addScore('score', SnakeScore, minusScore);
+                
+                addScore('score', SnakeScore, getRandomInt(-25, 0));
             }
             console.log(choice);
 
