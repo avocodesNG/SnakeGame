@@ -6,7 +6,20 @@ var SnakeScore = 0;
 var newSnakeScore = getRandomInt(0,25);
 // data structure
 questions = {
-    'count': 1,
+    'count': 0,
+    0: {
+        'question': 'Election Period is close, What will you do?',
+        'answer': [
+            'Apply for PVC', 'Never Care', 'No Interest'
+        ],
+        'color': [
+            'red', 'yellow', 'green'
+        ],
+        'options': [
+            'A', 'B', 'C'
+        ],
+        'correct': 'red'
+    },
     1: {
         'question': 'You have to visit the nearest polling unit to apply for your PVC.',
         'answer': [
@@ -146,34 +159,6 @@ function loop() {
     context.fillRect(apple3.x, apple3.y, grid - 1, grid - 1);
 
 
-    // increment score
-    function addScore(targetElement, previousScore, scoreToAdd) {
-        SnakeScore = previousScore + scoreToAdd;
-        score = document.getElementById(targetElement);
-        score.innerHTML = SnakeScore;
-    }
-
-    function populate() {
-        counter = 0;
-        answers = '';
-
-
-        question = document.getElementById('question');
-        answer = document.getElementById('answer');
-        // Run a script to build the answers choices
-        questions[questions.count].answer.forEach(populateAnswers);
-        // replace with new answers
-        question.innerHTML = questions[questions.count].question;
-        answer.innerHTML = answers;
-    }
-    // function to build arrays
-    function populateAnswers(element, index){
-        color = questions[questions.count].color[index];
-        Option = questions[questions.count].options[index];
-        correct = questions[questions.count].correct;
-
-        answers += "<h4><b style='color:" + color + "'>" + Option + "</b> - " + element + " </h4>";
-    }
     
    
     // draw snake one cell at a time
@@ -264,6 +249,36 @@ document.addEventListener('keydown', function(e) {
     }
 });
 
+// increment score
+function addScore(targetElement, previousScore, scoreToAdd) {
+    SnakeScore = previousScore + scoreToAdd;
+    score = document.getElementById(targetElement);
+    score.innerHTML = SnakeScore;
+}
+
+function populate() {
+    counter = 0;
+    answers = '';
+
+
+    question = document.getElementById('question');
+    answer = document.getElementById('answer');
+    // Run a script to build the answers choices
+    questions[questions.count].answer.forEach(populateAnswers);
+    // replace with new answers
+    question.innerHTML = questions[questions.count].question;
+    answer.innerHTML = answers;
+}
+// function to build arrays
+function populateAnswers(element, index) {
+    color = questions[questions.count].color[index];
+    Option = questions[questions.count].options[index];
+    correct = questions[questions.count].correct;
+
+    answers += "<h4><b style='color:" + color + "'>" + Option + "</b> - " + element + " </h4>";
+}
+
 
 // start the game
 requestAnimationFrame(loop);
+populate();
